@@ -5,7 +5,7 @@ rospy.init_node('no2')
 
 matricula='0'
 
-def recebe_msg(recebido):
+def recebe_matricula(recebido):
     global matricula
     matricula = recebido.data
 
@@ -19,6 +19,6 @@ def timerCallBack(event):
 
 pub = rospy.Publisher('/topic2', String, queue_size=1)
 timer = rospy.Timer(rospy.Duration(0.1), timerCallBack)
-sub = rospy.Subscriber('/topic1', String, recebe_msg)
+sub = rospy.Subscriber('/topic1', String, recebe_matricula)
 
 rospy.spin()

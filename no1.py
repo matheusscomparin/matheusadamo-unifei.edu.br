@@ -3,14 +3,14 @@ from std_msgs.msg import String
 
 
 rospy.init_node('no1')
-volta = 'Aguardando'
+wait = 'Esperando soma'
 
-def recebe_volta(msg_volta):
-    global volta
-    volta = msg_volta.data
+def somaCallBack(msg_soma):
+    global wait
+    wait = msg_soma.data
 
 def timerCallBack(event):
-    print(volta)
+    print(wait)
     msg = String()
     msg.data = '2017003253'
     pub.publish(msg)
@@ -18,6 +18,6 @@ def timerCallBack(event):
 
 pub = rospy.Publisher('/topic1', String, queue_size=1)
 timer = rospy.Timer(rospy.Duration(0.1), timerCallBack)
-sub = rospy.Subscriber('/topic2', String, recebe_volta)
+sub = rospy.Subscriber('/topic2', String, somaCallBack)
 
 rospy.spin()
